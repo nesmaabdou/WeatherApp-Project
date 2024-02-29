@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="src/style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Project WeatherApp</title>
   </head>
   <body>
@@ -23,7 +24,7 @@
       <main>
         <div class="weather-app-data">
           <div>
-            <h1 class="weather-app-city" id="weather-app-city">Cairo</h1>
+            <h1 class="weather-app-city" id="city">Cairo</h1>
             <p class="weather-app-details">
               Thursday 10:16, clear sky
               <br />
@@ -32,7 +33,7 @@
           </div>
           <div class="weather-app-temp-container">
             <div class="weather-app-icon">☀️</div>
-            <div class="weather-app-temp">23</div>
+            <div class="weather-app-temp" id="temp"></div>
             <div class="weather-app-temp-unit">°C</div>
           </div>
         </div>
