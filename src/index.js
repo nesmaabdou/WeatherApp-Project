@@ -16,7 +16,7 @@ function updateWeather (response) {
     humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
     windSpeedElement.innerHTML = `${Math.round(response.data.wind.speed)}km/h`;
     timeElement.innerHTML = formatDate(date);
-     iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+    iconElement.innerHTML = `<img src="${response.data.condition.icon_url}"  />`;
 }
 
 function formatDate(date){
