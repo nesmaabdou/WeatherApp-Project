@@ -6,7 +6,7 @@ function updateWeather (response) {
     let humidityElement = document.querySelector("#humidity");
     let windSpeedElement = document.querySelector("#wind-speed");
     let timeElement = document.querySelector("#time");
-    let date = new Date (response.data.time *1000);
+    let date = new Date (response.data.time * 1000);
     let iconElement = document.querySelector("#icon");
 
     
@@ -35,7 +35,7 @@ function formatDate(date){
     if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-    return `${day} ${hours}:${minutes},`;
+    return `${day} ${hours}:${minutes}`;
 }
 
 function searchCity (city) {
@@ -51,7 +51,33 @@ function submitSearch(event) {
     searchCity(searchInput.value);
 }
 
+function displayForecast(){
+    
+    let forecastdays = ["Tues", "Wed", "Thu", "Fri", "Sat"];
+    let forecastHtml ="";
+
+    forecastdays.forEach(function(day){
+     forecastHtml =
+      forecastHtml +   
+    `<div class="weather-forecast-day">
+     <div class="weather-forecast-date">${day}</div>
+     <div class="weather-forecast-icon">
+        <img src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png" alt="" width="36"/>
+     </div>
+     <div class="weather-forecast-temperature">
+        <span class="weather-forecast-temp-high"><strong>18°</strong></span>
+        <span class="weather-forecast-temp-low">12°</span>
+     </div>
+    </div>`;})
+let forecastElement = document.querySelector("#forecast");
+forecastElement.innerHTML = forecastHtml;
+}
+
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", submitSearch);
 searchCity("Cairo"); 
+
+displayForecast();
+
+
 
