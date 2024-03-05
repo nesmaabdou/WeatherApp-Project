@@ -83,6 +83,22 @@ display: flex;
     margin-top: 15px;
 }
 
+.weather-forecast-date{
+    font-size: 16px;
+    color: rgba(39, 33, 66, 0.4);
+    margin-bottom: 10px;
+}
+
+.weather-forecast-icon{
+    font-size: 38px;
+}
+
+.weather-forecast-temperature{
+    color: #f65282;
+    margin-top: 10px;
+}
+
+
 footer{
 border-top: 1px solid #f9f7fe;
 padding: 30px 0 0px 0;
