@@ -19,7 +19,7 @@ function updateWeather (response) {
     iconElement.innerHTML = `<img src="${response.data.condition.icon_url}"  />`;
 
     getForecast(response.data.city);
-    console.log(response.data.city);
+    console.log(response.data);
 }
 
 function formatDate(date){
@@ -45,6 +45,7 @@ function searchCity (city) {
     let apiKey = "0576695642baeo5ffb491e0t30b39d4a";
     let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`
     axios.get(apiUrl).then(updateWeather);
+
 }
 
 function submitSearch(event) {
@@ -58,34 +59,35 @@ function getForecast(city){
     let apiKey = "0576695642baeo5ffb491e0t30b39d4a";
     let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}`;
     axios.get(apiUrl).then(displayForecast);
+    console.log(apiUrl);
 }
 
+function formatDay(timestamp) {
+let date = new Date(timestamp *1000);
+let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+return days[date.getDay()];
+}
 function displayForecast(response){
-    let forecastdays = ["Tues", "Wed", "Thu", "Fri", "Sat"];
     let forecastHtml ="";
-
-    forecastdays.forEach(function(day){
+    response.data.daily.forEach(function(day, index){
+        if (index<5){
      forecastHtml =
       forecastHtml +   
     `<div class="weather-forecast-day">
-     <div class="weather-forecast-date">${day}</div>
-     <div class="weather-forecast-icon">
-        <img src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png" alt="" width="36"/>
-     </div>
+     <div class="weather-forecast-date">${formatDay(day.time)}</div>
+     <img src="${day.condition.icon_url}" class="weather-forecast-icon" />
      <div class="weather-forecast-temperature">
-        <span class="weather-forecast-temp-high"><strong>18°</strong></span>
-        <span class="weather-forecast-temp-low">12°</span>
+        <span class="weather-forecast-temp-high"><strong>${Math.round(day.temperature.maximum)}°</strong></span>
+        <span class="weather-forecast-temp-low">${Math.round(day.temperature.minimum)}°</span>
      </div>
-    </div>`;})
+    </div>`;}})
 let forecastElement = document.querySelector("#forecast");
-forecastElement.innerHTML = forecastHtml;
+forecastElement.innerHTML = forecastHtml;      
 }
 
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", submitSearch);
 searchCity("Cairo"); 
-
-displayForecast();
 
 
 
